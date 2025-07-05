@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 import pandas as pd
 import re
-import requests
 
 app = Flask(__name__)
 
@@ -12,7 +11,7 @@ def cargar_datos():
     try:
         df = pd.read_csv(SHEET_CSV_URL)
         return df
-    except Exception as e:
+    except Exception:
         return None
 
 @app.route("/reporte", methods=["POST"])
@@ -49,15 +48,15 @@ def responder():
         f"- Horas en LIVE: {creador.iloc[0]['Duración de LIVE']}\n"
         f"- Ingresos por suscripciones: ${creador.iloc[0]['Ingresos por suscripciones']:.2f}\n"
         f"- Nuevos seguidores: {creador.iloc[0]['Suscriptores']}\n"
-        "\n✨ Aqui tienes tu reporte  ✨"
+        "\n✨ Aquí tienes tu reporte ✨"
     )
 
     return jsonify({"respuesta": respuesta})
 
-# Endpoint raíz para evitar error 404
-@app.route("/")
-def inicio():
+# Endpoint raíz para verificar si la API está activa
+@app.route("/", methods=["GET"])
+def home():
     return "✅ API de reportes de Superiority está activa."
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
