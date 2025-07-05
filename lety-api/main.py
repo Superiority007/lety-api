@@ -6,7 +6,7 @@ import requests
 app = Flask(__name__)
 
 # URL del Google Sheet en formato CSV
-SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1dvdJ2acLSSlfEsTM6R13fvTrChap3C0HWQJduLX2WCA/export?format=csv"
+SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1JaLgqMJ8U1NEHPUnLs4RYKkO9oAVhhkqHNYPcxLi-KQ/edit?gid=753962185#gid=753962185"
 
 def cargar_datos():
     try:
