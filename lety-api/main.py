@@ -6,7 +6,7 @@ import requests
 app = Flask(__name__)
 
 # URL del Google Sheet en formato CSV
-SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1JaLgqMJ8U1NEHPUnLs4RYKkO9oAVhhkqHNYPcxLi-KQ/edit?gid=753962185#gid=753962185"
+SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1JaLgqMJ8U1NEHPUnLs4RYKkO9oAVhhkqHNYPcxLi-KQ/export?format=csv"
 
 def cargar_datos():
     try:
@@ -23,7 +23,9 @@ def responder():
     pin_match = re.search(r"pin\s+es\s+(\d{6})", mensaje)
 
     if not usuario_match or not pin_match:
-        return jsonify({"respuesta": "Por favor envíame tu usuario y PIN en el formato correcto. Ejemplo: 'mi usuario es camilamelo_01 y mi PIN es 123456'"})
+        return jsonify({
+            "respuesta": "Por favor envíame tu usuario y PIN en el formato correcto. Ejemplo: 'mi usuario es camilamelo_01 y mi PIN es 123456'"
+        })
 
     usuario = usuario_match.group(1)
     pin = int(pin_match.group(1))
@@ -52,5 +54,10 @@ def responder():
 
     return jsonify({"respuesta": respuesta})
 
+# Endpoint raíz para evitar error 404
+@app.route("/")
+def inicio():
+    return "✅ API de reportes de Superiority está activa."
+
 if __name__ == "__main__":
-Agregado endpoint raíz para evitar error 404
+    app.run(debug=True)
