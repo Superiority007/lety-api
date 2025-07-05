@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: lety-api
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn main:app
+    envVars: []
