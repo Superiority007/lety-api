@@ -53,4 +53,4 @@ def responder():
     return jsonify({"respuesta": respuesta})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+Agregado endpoint raíz para evitar error 404
